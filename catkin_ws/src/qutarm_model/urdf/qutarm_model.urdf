@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<robot name="qutarm">
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder length="3" radius="50"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="base_link_to_servo1" type="fixed">
+    <parent link="base_link" />
+    <child link="servo1_link" />
+    <origin rpy="0 0 1.57075" xyz="-12 0 13.5" />
+  </joint>
+  <link name="servo1_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://qutarm_model/meshes/xl320d.stl" />
+      </geometry>
+      <material name="gray">
+        <color rgba=".2 .2 .2 .9" />
+      </material>
+    </visual>
+  </link>
+  <joint name="servo1" type="revolute">
+    <parent link="servo1_link" />
+    <child link="base2" />
+    <origin rpy="0 0 -2.61799" xyz="0 0 33" />
+    <axis xyz="0 0 1" />
+    <limit lower="0" upper="5.2359" effort="0.3" velocity="11.938" />
+  </joint>
+  <link name="base2" />
+  <joint name="base2_to_pivot2" type="fixed">
+    <parent link="base2" />
+    <child link="pivot2" />
+    <origin rpy="1.57075 0 0" xyz="0 12 0" />
+  </joint>
+  <link name="pivot2">
+    <visual>
+      <geometry>
+        <mesh filename="package://qutarm_model/meshes/dmfb03w.stl" />
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="pivot2_to_servo2axis" type="fixed">
+    <parent link="pivot2" />
+    <child link="servo2axis" />
+    <origin rpy="1.57075 0 1.57075" xyz="0 0 12" />
+  </joint>
+  <link name="servo2axis" />
+  <joint name="servo2" type="revolute">
+    <parent link="servo2axis" />
+    <child link="servo2_link" />
+    <origin rpy="0 0 -2.61799" xyz="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="0" upper="5.2359" effort="0.3" velocity="11.938" />
+  </joint>
+  <link name="servo2_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://qutarm_model/meshes/xl320d.stl" />
+      </geometry>
+      <material name="gray">
+        <color rgba=".2 .2 .2 .9" />
+      </material>
+    </visual>
+  </link>
+  <joint name="servo2_to_arm2top" type="fixed">
+    <parent link="servo2_link" />
+    <child link="arm2top" />
+    <origin rpy="1.57075 0 -1.57075" xyz="13 -75 0" />
+  </joint>
+  <link name="arm2top">
+    <visual>
+      <geometry>
+        <mesh filename="package://qutarm_model/meshes/arm150.stl" />
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="servo2_to_arm2bot" type="fixed">
+    <parent link="servo2_link" />
+    <child link="arm2bot" />
+    <origin rpy="-1.57075 0 -1.57075" xyz="-13 -75 0" />
+  </joint>
+  <link name="arm2bot">
+    <visual>
+      <geometry>
+        <mesh filename="package://qutarm_model/meshes/arm150.stl" />
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="arm2top_to_servo3" type="fixed">
+    <parent link="arm2top" />
+    <child link="servo3_link" />
+    <origin rpy="1.57075 1.57075 0" xyz="75 0 13" />
+  </joint>
+  <link name="servo3_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://qutarm_model/meshes/xl320d.stl" />
+      </geometry>
+      <material name="gray">
+        <color rgba=".2 .2 .2 .9" />
+      </material>
+    </visual>
+  </link>
+  <joint name="servo3" type="revolute">
+    <parent link="servo3_link" />
+    <child link="base4" />
+    <origin rpy="0 0 -2.61799" xyz="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="0" upper="5.2359" effort="0.3" velocity="11.938" />
+  </joint>
+  <link name="base4" />
+  <joint name="base4_to_arm4right" type="fixed">
+    <parent link="base4" />
+    <child link="arm4right" />
+    <origin rpy="0 0 1.57075" xyz="0 69.25 -16" />
+  </joint>
+  <link name="arm4right">
+    <visual>
+      <geometry>
+        <mesh filename="package://qutarm_model/meshes/arm138.stl" />
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="arm4right_to_arm4left" type="fixed">
+    <parent link="arm4right" />
+    <child link="arm4left" />
+    <origin rpy="0 3.14159 0" xyz="0 0 32" />
+  </joint>
+  <link name="arm4left">
+    <visual>
+      <geometry>
+        <mesh filename="package://qutarm_model/meshes/arm138.stl" />
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="arm4left_to_servo4axis" type="fixed">
+    <parent link="arm4left" />
+    <child link="servo4axis" />
+    <origin rpy="0 0 0" xyz="-69.25 0 16" />
+  </joint>
+  <link name="servo4axis" />
+  <joint name="servo4" type="revolute">
+    <parent link="servo4axis" />
+    <child link="servo4_link" />
+    <origin rpy="0 0 -4.18879" xyz="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="0" upper="5.2359" effort="0.3" velocity="11.938" />
+  </joint>
+  <link name="servo4_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://qutarm_model/meshes/xl320d.stl" />
+      </geometry>
+      <material name="gray">
+        <color rgba=".2 .2 .2 .9" />
+      </material>
+    </visual>
+  </link>
+  <joint name="servo4_to_pencilholder" type="fixed">
+    <parent link="servo4_link" />
+    <child link="pencilholder" />
+    <origin rpy="0 0 3.14159" xyz="0 -27 0" />
+  </joint>
+  <link name="pencilholder">
+    <visual>
+      <geometry>
+        <mesh filename="package://qutarm_model/meshes/pencilholder.stl" />
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="pencilholder_to_pencil" type="fixed">
+    <parent link="pencilholder" />
+    <child link="pencil" />
+    <origin rpy="0 1.57075 0" xyz="-30 14 0" />
+  </joint>
+  <link name="pencil">
+    <visual>
+      <geometry>
+        <cylinder length="120" radius="4.5" />
+      </geometry>
+      <material name="darkgrey">
+        <color rgba="0.1 0.1 0.1 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="pencil_to_penciltip" type="fixed">
+    <parent link="pencil" />
+    <child link="penciltip" />
+    <origin rpy="0 0 0" xyz="0 0 80" />
+  </joint>
+  <link name="penciltip">
+    <visual>
+      <geometry>
+        <mesh filename="package://qutarm_model/meshes/penciltip.stl" scale="1.2 1.2 3" />
+      </geometry>
+      <material name="brown">
+        <color rgba="0.9 0.7 0.4 1" />
+      </material>
+    </visual>
+  </link>
+</robot>

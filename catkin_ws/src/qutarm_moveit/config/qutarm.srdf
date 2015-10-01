@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="qutarm">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="arm">
+        <joint name="servo1" />
+        <joint name="servo2" />
+        <joint name="servo3" />
+        <joint name="servo4" />
+        <chain base_link="base_link" tip_link="servo4_link" />
+    </group>
+    <group name="pencil">
+        <chain base_link="servo4_link" tip_link="penciltip" />
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="stand" group="arm">
+        <joint name="servo1" value="0" />
+        <joint name="servo2" value="3.7651" />
+        <joint name="servo3" value="5.0888" />
+        <joint name="servo4" value="3.9416" />
+    </group_state>
+    <group_state name="p1" group="arm">
+        <joint name="servo1" value="0.9827" />
+        <joint name="servo2" value="4.074" />
+        <joint name="servo3" value="5.2359" />
+        <joint name="servo4" value="3.9461" />
+    </group_state>
+    <group_state name="p2" group="arm">
+        <joint name="servo1" value="1.5201" />
+        <joint name="servo2" value="3.8642" />
+        <joint name="servo3" value="5.1131" />
+        <joint name="servo4" value="3.9564" />
+    </group_state>
+    <group_state name="p3" group="arm">
+        <joint name="servo1" value="3.1528" />
+        <joint name="servo2" value="3.7823" />
+        <joint name="servo3" value="5.0517" />
+        <joint name="servo4" value="3.9615" />
+    </group_state>
+    <group_state name="p4" group="arm">
+        <joint name="servo1" value="4.9749" />
+        <joint name="servo2" value="3.7158" />
+        <joint name="servo3" value="4.8827" />
+        <joint name="servo4" value="3.9615" />
+    </group_state>
+    <group_state name="p5" group="arm">
+        <joint name="servo1" value="3.4138" />
+        <joint name="servo2" value="3.639" />
+        <joint name="servo3" value="4.8724" />
+        <joint name="servo4" value="3.9615" />
+    </group_state>
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="pencil" parent_link="servo4_link" group="pencil" parent_group="arm" />
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    <virtual_joint name="base" type="fixed" parent_frame="base_frame" child_link="base_link" />
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="arm2bot" link2="arm2top" reason="Default" />
+    <disable_collisions link1="arm2bot" link2="arm4left" reason="Never" />
+    <disable_collisions link1="arm2bot" link2="arm4right" reason="Never" />
+    <disable_collisions link1="arm2bot" link2="pencilholder" reason="Never" />
+    <disable_collisions link1="arm2bot" link2="servo2_link" reason="Adjacent" />
+    <disable_collisions link1="arm2bot" link2="servo3_link" reason="Default" />
+    <disable_collisions link1="arm2bot" link2="servo4_link" reason="Never" />
+    <disable_collisions link1="arm2top" link2="arm4left" reason="Never" />
+    <disable_collisions link1="arm2top" link2="arm4right" reason="Never" />
+    <disable_collisions link1="arm2top" link2="pencilholder" reason="Never" />
+    <disable_collisions link1="arm2top" link2="pivot2" reason="Default" />
+    <disable_collisions link1="arm2top" link2="servo1_link" reason="Default" />
+    <disable_collisions link1="arm2top" link2="servo2_link" reason="Adjacent" />
+    <disable_collisions link1="arm2top" link2="servo3_link" reason="Adjacent" />
+    <disable_collisions link1="arm2top" link2="servo4_link" reason="Never" />
+    <disable_collisions link1="arm4left" link2="arm4right" reason="Adjacent" />
+    <disable_collisions link1="arm4left" link2="pencilholder" reason="Never" />
+    <disable_collisions link1="arm4left" link2="pivot2" reason="Never" />
+    <disable_collisions link1="arm4left" link2="servo1_link" reason="Never" />
+    <disable_collisions link1="arm4left" link2="servo2_link" reason="Never" />
+    <disable_collisions link1="arm4left" link2="servo3_link" reason="Default" />
+    <disable_collisions link1="arm4left" link2="servo4_link" reason="Adjacent" />
+    <disable_collisions link1="arm4right" link2="pencilholder" reason="Never" />
+    <disable_collisions link1="arm4right" link2="pivot2" reason="Never" />
+    <disable_collisions link1="arm4right" link2="servo1_link" reason="Never" />
+    <disable_collisions link1="arm4right" link2="servo2_link" reason="Never" />
+    <disable_collisions link1="arm4right" link2="servo3_link" reason="Adjacent" />
+    <disable_collisions link1="arm4right" link2="servo4_link" reason="Default" />
+    <disable_collisions link1="base_link" link2="pivot2" reason="Never" />
+    <disable_collisions link1="base_link" link2="servo1_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="servo2_link" reason="Never" />
+    <disable_collisions link1="base_link" link2="servo3_link" reason="Never" />
+    <disable_collisions link1="pencil" link2="pencilholder" reason="Adjacent" />
+    <disable_collisions link1="pencil" link2="penciltip" reason="Adjacent" />
+    <disable_collisions link1="pencil" link2="servo3_link" reason="Never" />
+    <disable_collisions link1="pencil" link2="servo4_link" reason="Never" />
+    <disable_collisions link1="pencilholder" link2="penciltip" reason="Never" />
+    <disable_collisions link1="pencilholder" link2="pivot2" reason="Never" />
+    <disable_collisions link1="pencilholder" link2="servo2_link" reason="Never" />
+    <disable_collisions link1="pencilholder" link2="servo3_link" reason="Never" />
+    <disable_collisions link1="pencilholder" link2="servo4_link" reason="Adjacent" />
+    <disable_collisions link1="penciltip" link2="pivot2" reason="Never" />
+    <disable_collisions link1="penciltip" link2="servo3_link" reason="Never" />
+    <disable_collisions link1="penciltip" link2="servo4_link" reason="Never" />
+    <disable_collisions link1="pivot2" link2="servo1_link" reason="Adjacent" />
+    <disable_collisions link1="pivot2" link2="servo2_link" reason="Adjacent" />
+    <disable_collisions link1="pivot2" link2="servo3_link" reason="Never" />
+    <disable_collisions link1="pivot2" link2="servo4_link" reason="Never" />
+    <disable_collisions link1="servo1_link" link2="servo2_link" reason="Default" />
+    <disable_collisions link1="servo1_link" link2="servo3_link" reason="Never" />
+    <disable_collisions link1="servo2_link" link2="servo3_link" reason="Never" />
+    <disable_collisions link1="servo2_link" link2="servo4_link" reason="Never" />
+    <disable_collisions link1="servo3_link" link2="servo4_link" reason="Never" />
+</robot>

@@ -1,0 +1,10 @@
+controller_list:
+  - name: fake_arm_controller
+    joints:
+      - servo1
+      - servo2
+      - servo3
+      - servo4
+  - name: fake_pencil_controller
+    joints:
+      []

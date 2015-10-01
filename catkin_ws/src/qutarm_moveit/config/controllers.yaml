@@ -1,0 +1,11 @@
+controller_list:
+ - name: /qutarm_controller
+   action_ns: follow_joint_trajectory
+   type: FollowJointTrajectory
+   default: true
+   joints:
+     - servo1
+     - servo2
+     - servo3
+     - servo4
+
